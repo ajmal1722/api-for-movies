@@ -4,7 +4,11 @@ const homeRoute = async (req, res) => {
 };
 
 const userLogin = async (req, res) => {
-    res.json('login')
+    try {
+        res.json({login})
+    } catch (error) {
+        
+    }
 }
 
 module.exports = { homeRoute, userLogin };
