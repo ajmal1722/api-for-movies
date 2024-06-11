@@ -1,0 +1,16 @@
+{
+  "name": "api-movies",
+  "version": "1.0.0",
+  "description": "A simple API for managing movies.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "author": "Muhammed Ajmal",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  }
+}
