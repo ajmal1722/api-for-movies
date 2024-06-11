@@ -3,4 +3,9 @@ const homeRoute = async (req, res) => {
     res.json('home');
 };
 
-module.exports = homeRoute;
+const userLogin = async (req, res) => {
+    res.json('login')
+}
+
+module.exports = { homeRoute, userLogin };
+                
