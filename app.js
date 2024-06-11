@@ -8,6 +8,10 @@ const app = express()
 // Connect to the database
 connectDB();
 
+// Middleware to parse JSON
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.use('/', require('./server/routes/userRouter'))
 
 app.listen(PORT, () => {
