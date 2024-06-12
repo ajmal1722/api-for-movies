@@ -7,8 +7,17 @@ const homeRoute = async (req, res) => {
 
 const userSignUp = async (req, res) => {
     try {
-        // getting data from request body
+        // Extracting data from the request body
         const { name, email, password } = req.body;
+
+        // Check if all required fields are provided
+        if (!name || !password) {
+            return res.status(400).json({ error: 'Name is required' });
+        } else if (!email) {
+            return res.status(400).json({ error: 'Email is required' });
+        } else if (!password) {
+            return res.status(400).json({ error: 'Password is required' });
+        }
 
         // check if the user already exists
         const existingUser = await User.findOne({ email })
@@ -16,16 +25,15 @@ const userSignUp = async (req, res) => {
             return res.status(400).json({ error: 'User with this email already exist'})
         }
 
-        // hashyng the password
+        // Hashing the password
         const hashedPassword = await bcrypt.hash(password, 8)
         console.log(hashedPassword)
 
+        // Creating the user
         const userData = await User.create({ name, email, password: hashedPassword })
-        userData.password = undefined
+        userData.password = undefined // Remove password from the response
 
-
-
-        res.json({status: 'Success', userData})
+        res.status(201).json({ status: 'Success', userData });
     } catch (error) {
         console.log('Error message:', error)
         res.status(500).json({ error: error.message })
