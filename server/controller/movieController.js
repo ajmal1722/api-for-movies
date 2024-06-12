@@ -1,6 +1,12 @@
 const Movies = require('../collections/movieCollection')
 
-// create movies
+// @desc Get Movies
+// @route GET /api/movies
+// @access Private
+
+// @desc Set Movies
+// @route POST /api/movies
+// @access Private
 const createMovies = async (req, res) => {
     try {
        const movieData = req.body;
@@ -10,8 +16,25 @@ const createMovies = async (req, res) => {
         res.status(201).json({ status: 'Success', movieData });
     } catch (error) {
         console.log('Error message:', error)
-        res.status(500).json({ error: error.message })
+        res.status(500).json({ status: 'Failed', error: error.message })
     }
 }
 
-module.exports = { createMovies}
+// @desc Delete Movies
+// @route DELETE /api/movies/:id
+// @access Private
+const deleteMovie = async (req, res) => {
+    try {
+        const id = req.params.id;
+        
+        res.status(201).json({ id: id });
+    } catch (error) {
+        console.log('Error message:', error)
+        res.status(500).json({ status: 'Failed', error: error.message })
+    }
+}
+
+module.exports = { 
+    createMovies, 
+    deleteMovie,
+}

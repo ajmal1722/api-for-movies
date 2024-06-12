@@ -26,7 +26,7 @@ const movieSchema = new mongoose.Schema({
         trim: true
     },
     language: {
-        type: String,
+        type: [String],
         required: true,
         trim: true
     },
