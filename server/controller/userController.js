@@ -11,7 +11,7 @@ const userSignUp = async (req, res) => {
         const { name, email, password } = req.body;
 
         // Check if all required fields are provided
-        if (!name || !password) {
+        if (!name) {
             return res.status(400).json({ error: 'Name is required' });
         } else if (!email) {
             return res.status(400).json({ error: 'Email is required' });

@@ -13,6 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/', require('./server/routes/userRouter'))
+app.use('/api/', require('./server/routes/movieRouter'))
 
 app.listen(PORT, () => {
     console.log(`Server is running on port: http://localhost:${PORT}`);
