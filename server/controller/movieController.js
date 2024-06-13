@@ -46,12 +46,15 @@ const createMovies = async (req, res) => {
  */
 const updateMovies = async (req, res) => {
     try {
+        // Find the movie by ID
         const movie = await Movies.findById(req.params.id)
 
+        // If movie not found, return 404
         if (!movie) {
             return res.status(404).json({ status: 'Failed', error: 'Movie not found' });
         }
 
+        // Update the movie with the new data
         const updatedMovie = await Movies.findByIdAndUpdate(req.params.id, req.body, {new: true});
 
         res.status(200).json({ status: 'Success', updatedMovie });

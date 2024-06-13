@@ -1,6 +1,8 @@
 const express = require('express');
 const connectDB = require('./server/database/connection')
 require('dotenv').config()
+const swaggerJsdoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express')
 
 const PORT = process.env.PORT || 3000;
 const app = express()
@@ -11,6 +13,22 @@ connectDB();
 // Middleware to parse JSON
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Swagger setup
+const options = {
+    definition: {
+        openapi: '3.0.0', 
+        servers: [
+            {
+                url: 'http://localhost:8000/'
+            }
+        ]
+    },
+    apis: ['./routes/*.js']
+}
+
+const spacs = swaggerJsdoc(options);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(spacs))
 
 app.use('/', require('./server/routes/userRouter'))
 app.use('/api/movies/', require('./server/routes/movieRouter'))
