@@ -50,17 +50,118 @@ const movieController = require('../controller/movieController')
  *         language: ["English", "Japanese", "French"]
  */
 
-
+/**
+ * @swagger
+ * /api/movies:
+ *   get:
+ *     summary: Get all the movies
+ *     tags: [Movies]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Movie'
+ *     responses:
+ *       200:
+ *         description: The movie was successfully created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Movie'
+ *       500:
+ *         description: Some server error
+ */
 router.get('/', movieController.getMovies)
 
 
-
+/**
+ * @swagger
+ * /api/movies:
+ *   post:
+ *     summary: Create a new movie
+ *     tags: [Movies]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Movie'
+ *     responses:
+ *       201:
+ *         description: The movie was successfully created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Movie'
+ *       500:
+ *         description: Some server error
+ */
 router.post('/', movieController.createMovies);
 
-
+/**
+ * @swagger
+ * /api/movies/{id}:
+ *   put:
+ *     summary: Update an existing movie
+ *     tags: [Movies]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The movie id
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Movie'
+ *     responses:
+ *       200:
+ *         description: The movie was successfully updated
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Movie'
+ *       404:
+ *         description: The movie was not found
+ *       500:
+ *         description: Some server error
+ */
 router.put('/:id', movieController.updateMovies)
 
-
+/**
+ * @swagger
+ * /api/movies/{id}:
+ *   delete:
+ *     summary: Remove the movie by id
+ *     tags: [Movies]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The movie id
+ *     responses:
+ *       200:
+ *         description: The movie was deleted
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                 id:
+ *                   type: string
+ *       404:
+ *         description: The movie was not found
+ *       500:
+ *         description: Some server error
+ */
 router.delete('/:id', movieController.deleteMovie)
 
 module.exports = router
