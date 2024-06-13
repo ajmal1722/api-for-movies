@@ -17,15 +17,20 @@ app.use(express.urlencoded({ extended: true }));
 // Swagger setup
 const options = {
     definition: {
-        openapi: '3.0.0', 
+        openapi: '3.0.0',
+        info: {
+            title: 'Movie Streaming API',
+            version: '1.0.0',
+            description: 'API for managing a movie streaming service'
+        },
         servers: [
             {
                 url: 'http://localhost:8000/'
             }
         ]
     },
-    apis: ['./routes/*.js']
-}
+    apis: ['./server/routes/*.js'] // Path to the API docs
+};
 
 const spacs = swaggerJsdoc(options);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(spacs))
