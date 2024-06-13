@@ -1,8 +1,25 @@
 const Movies = require('../collections/movieCollection')
 
-// @desc Get Movies
-// @route GET /api/movies
-// @access Private
+
+/**
+ * @desc Get Movies
+ * @route GET /api/movies
+ * @access Private
+ */
+const getMovies = async (req, res) => {
+    try {
+        const movies = await Movies.find()
+
+        res.status(200).json({
+            status: 'Success',
+            totalMovies: movies.length,
+            movies
+        });
+    } catch (error) {
+        console.log('Error message:', error)
+        res.status(500).json({ status: 'Failed', error: error.message })
+    }
+}
 
 /**
  * @desc Set Movies
@@ -20,6 +37,20 @@ const createMovies = async (req, res) => {
         console.log('Error message:', error)
         res.status(500).json({ status: 'Failed', error: error.message })
     }
+}
+
+/**
+ * @desc Upadate Movies
+ * @route PUT /api/movies/:id
+ * @access Private
+ */
+const updateMovies = async (req, res) => {
+    try {
+        
+     } catch (error) {
+         console.log('Error message:', error)
+         res.status(500).json({ status: 'Failed', error: error.message })
+     }
 }
 
 /**
@@ -45,6 +76,8 @@ const deleteMovie = async (req, res) => {
 }
 
 module.exports = { 
+    getMovies,
     createMovies, 
+    updateMovies,
     deleteMovie,
 }
