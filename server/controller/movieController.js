@@ -32,7 +32,7 @@ const createMovies = async (req, res) => {
 
        const newMovie = await Movies.create(movieData)
 
-        res.status(201).json({ status: 'Success', movieData });
+        res.status(201).json({ status: 'Success', newMovie });
     } catch (error) {
         console.log('Error message:', error)
         res.status(500).json({ status: 'Failed', error: error.message })
@@ -46,11 +46,19 @@ const createMovies = async (req, res) => {
  */
 const updateMovies = async (req, res) => {
     try {
-        
-     } catch (error) {
-         console.log('Error message:', error)
-         res.status(500).json({ status: 'Failed', error: error.message })
-     }
+        const movie = await Movies.findById(req.params.id)
+
+        if (!movie) {
+            return res.status(404).json({ status: 'Failed', error: 'Movie not found' });
+        }
+
+        const updatedMovie = await Movies.findByIdAndUpdate(req.params.id, req.body, {new: true});
+
+        res.status(200).json({ status: 'Success', updatedMovie });
+    } catch (error) {
+        console.log('Error message:', error)
+        res.status(500).json({ status: 'Failed', error: error.message })
+    }
 }
 
 /**

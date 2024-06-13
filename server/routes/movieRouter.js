@@ -9,7 +9,7 @@ router.get('/', movieController.getMovies)
 router.post('/', movieController.createMovies)
 
 // Update movie
-router.put('/', movieController.updateMovies)
+router.put('/:id', movieController.updateMovies)
 
 // Deleting a movie
 router.delete('/:id', movieController.deleteMovie)
