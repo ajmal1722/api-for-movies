@@ -87,5 +87,12 @@ const userLogin = async (req, res) => {
     }
 }
 
+const myAccount = async (req, re) => {
+    try {
+        
+    } catch (error) {
+        
+    }
+}
 module.exports = { homeRoute, userSignUp, userLogin };
                 
