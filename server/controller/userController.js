@@ -10,6 +10,7 @@ const generateToken = (id) => {
         { expiresIn: '2d'}
     )
 }
+
 const homeRoute = async (req, res) => {
     res.json('home');
 };
@@ -94,15 +95,20 @@ const myAccount = async (req, res) => {
         const user = await User.findById(userId)
 
         if (!user) {
-            return res.status(400).json({ error: 'User does not found'})
+            return res.status(404).json({ error: 'User does not found'})
         }
+
         user.password = undefined;
 
-        res.status(200).json({ user })
+        res.status(200).json({ 
+            status: 'Success',
+            user 
+        });
     } catch (error) {
         console.log('Error message:', error)
         res.status(500).json({ error: error.message }) 
     }
 }
+
 module.exports = { homeRoute, userSignUp, userLogin, myAccount };
                 
