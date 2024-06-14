@@ -40,5 +40,39 @@ const userSignUp = async (req, res) => {
     }
 }
 
-module.exports = { homeRoute, userSignUp };
+const userLogin = async (req, res) => {
+    try {
+        // Destructuring name and email from req.body
+        const { email, password } = req.body;
+
+        // finding the user
+        const user = await User.findOne({ email });
+
+        // if no user throw an error
+        if (!user) {
+            return res.status(404).json({ error: 'User does not exist' });
+        }
+
+        // Compare the Password
+        const passwordMatch = await bcrypt.compare(password, user.password)
+        
+        if (passwordMatch) {
+            user.password = undefined;
+            
+            res.status(200).json({
+                status: 'Success',
+                message: 'User successfully logged in',
+                user,
+                token
+            });
+        } else {
+            return res.status(401).json({ error: 'Password does not match'})
+        }
+    } catch (error) {
+        console.log('Error message:', error)
+        res.status(500).json({ error: error.message })
+    }
+}
+
+module.exports = { homeRoute, userSignUp, userLogin };
                 
