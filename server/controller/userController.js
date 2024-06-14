@@ -87,12 +87,22 @@ const userLogin = async (req, res) => {
     }
 }
 
-const myAccount = async (req, re) => {
+const myAccount = async (req, res) => {
     try {
-        
+        const userId = req.user.id;
+
+        const user = await User.findById(userId)
+
+        if (!user) {
+            return res.status(400).json({ error: 'User does not found'})
+        }
+        user.password = undefined;
+
+        res.status(200).json({ user })
     } catch (error) {
-        
+        console.log('Error message:', error)
+        res.status(500).json({ error: error.message }) 
     }
 }
-module.exports = { homeRoute, userSignUp, userLogin };
+module.exports = { homeRoute, userSignUp, userLogin, myAccount };
                 
