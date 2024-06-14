@@ -1,6 +1,15 @@
 const User = require('../collections/userCollection');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken')
 
+// Creating jwt token
+const generateToken = (id) => {
+    return jwt.sign(
+        { id }, 
+        process.env.JWT_SECRET, 
+        { expiresIn: '2d'}
+    )
+}
 const homeRoute = async (req, res) => {
     res.json('home');
 };
@@ -33,7 +42,11 @@ const userSignUp = async (req, res) => {
         const userData = await User.create({ name, email, password: hashedPassword })
         userData.password = undefined // Remove password from the response
 
-        res.status(201).json({ status: 'Success', userData });
+        res.status(201).json({
+            status: 'Success',
+            userData,
+            token: generateToken(userData._id)
+        });
     } catch (error) {
         console.log('Error message:', error)
         res.status(500).json({ error: error.message })
@@ -63,7 +76,7 @@ const userLogin = async (req, res) => {
                 status: 'Success',
                 message: 'User successfully logged in',
                 user,
-                token
+                token: generateToken(user._id)
             });
         } else {
             return res.status(401).json({ error: 'Password does not match'})
