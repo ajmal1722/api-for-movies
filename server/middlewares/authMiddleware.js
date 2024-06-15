@@ -27,4 +27,20 @@ const protect = async (req, res, next) => {
     }
 }
 
-module.exports = { protect }
+// Authorization for movie crud Operation
+const isAdminAuth = async (req, res, next) => {
+    try {
+        const user = req.user;
+
+        if (user && user.isAdmin === true) {
+            next();
+        } else {
+            return res.status(403).json({ error: 'You do not have access' });
+        }
+    } catch (error) {
+        console.log('Error', error);
+        return res.status(500).json({ error: error.message });
+    }
+}
+
+module.exports = { protect, isAdminAuth }
