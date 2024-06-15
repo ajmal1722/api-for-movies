@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router()
 const userController = require('../controller/userController');
-const { protect } = require('../middlewares/authMiddleware')
+const { protect  } = require('../middlewares/authMiddleware')
 
 router.get('/', userController.homeRoute);
 router.get('/my-account', protect, userController.myAccount);

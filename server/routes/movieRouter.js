@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router()
 const movieController = require('../controller/movieController')
+const { protect , isAdminAuth } = require('../middlewares/authMiddleware')
 
 /**
  * @swagger
@@ -97,7 +98,7 @@ router.get('/', movieController.getMovies)
  *       500:
  *         description: Some server error
  */
-router.post('/', movieController.createMovies);
+router.post('/', protect, isAdminAuth, movieController.createMovies);
 
 /**
  * @swagger
@@ -130,7 +131,7 @@ router.post('/', movieController.createMovies);
  *       500:
  *         description: Some server error
  */
-router.put('/:id', movieController.updateMovies)
+router.put('/:id', protect, isAdminAuth, movieController.updateMovies)
 
 /**
  * @swagger
@@ -162,6 +163,6 @@ router.put('/:id', movieController.updateMovies)
  *       500:
  *         description: Some server error
  */
-router.delete('/:id', movieController.deleteMovie)
+router.delete('/:id', protect, isAdminAuth, movieController.deleteMovie)
 
 module.exports = router
