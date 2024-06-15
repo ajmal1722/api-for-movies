@@ -43,6 +43,7 @@ const { protect , isAdminAuth } = require('../middlewares/authMiddleware')
  *             type: string
  *           description: The languages the movie is available in
  *       example:
+ *         id: "60d0fe4f5311236168a109ca"
  *         title: "Inception"
  *         releasedYear: "2010"
  *         duration: "148"
@@ -62,14 +63,14 @@ const { protect , isAdminAuth } = require('../middlewares/authMiddleware')
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Movie'
+ *             $ref: '#/components/schemas/Movies'
  *     responses:
  *       200:
  *         description: The movie was successfully created
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Movie'
+ *               $ref: '#/components/schemas/Movies'
  *       500:
  *         description: Some server error
  */
@@ -87,14 +88,14 @@ router.get('/', movieController.getMovies)
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Movie'
+ *             $ref: '#/components/schemas/Movies'
  *     responses:
  *       201:
  *         description: The movie was successfully created
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Movie'
+ *               $ref: '#/components/schemas/Movies'
  *       500:
  *         description: Some server error
  */
@@ -118,14 +119,14 @@ router.post('/', protect, isAdminAuth, movieController.createMovies);
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Movie'
+ *             $ref: '#/components/schemas/Movies'
  *     responses:
  *       200:
  *         description: The movie was successfully updated
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Movie'
+ *               $ref: '#/components/schemas/Movies'
  *       404:
  *         description: The movie was not found
  *       500:

@@ -30,7 +30,7 @@ const { protect  } = require('../middlewares/authMiddleware')
  *           type: string
  *           description: The password of the user
  *       example:
- *         id: "60d0fe4f5311236168a109ca"
+ *         _id: "60d0fe4f5311236168a109ca"
  *         name: "John Doe"
  *         email: "john.doe@example.com"
  *         isAdmin: false
