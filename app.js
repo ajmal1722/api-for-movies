@@ -19,9 +19,9 @@ const options = {
     definition: {
         openapi: '3.0.0',
         info: {
-            title: 'Movie Streaming API',
+            title: 'Managing Movie details API',
             version: '1.0.0',
-            description: 'API for managing a movie streaming service'
+            description: 'This API facilitates movie information management, enabling users to fetch movie details and granting admins the capability to create, read, update, and delete movie records.'
         },
         servers: [
             {
