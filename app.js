@@ -38,6 +38,9 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(spacs))
 app.use('/', require('./server/routes/userRouter'))
 app.use('/api/movies/', require('./server/routes/movieRouter'))
 
+app.get('/', (req, res) => {
+    res.send('Hello world');
+})
 app.listen(PORT, () => {
     console.log(`Server is running on port: http://localhost:${PORT}`);
 })
